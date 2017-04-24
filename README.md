@@ -3,7 +3,9 @@
 
 ## Overview
 This project is a practice of Deep Q Learning algorithm.
-Modify Flappybird from https://github.com/yenchenlin1994/DeepLearningFlappyBird.git
+
+Modify Flappybird DQN from https://github.com/yenchenlin1994/DeepLearningFlappyBird.git
+
 Use DQN as a General Game Player, could train all ALE supported games.
 
 ## Installation Dependencies:
@@ -112,4 +114,5 @@ This work is highly based on the following repos:
 
 1. [sourabhv/FlapPyBird] (https://github.com/sourabhv/FlapPyBird)
 2. [asrivat1/DeepLearningVideoGames](https://github.com/asrivat1/DeepLearningVideoGames)
-
+3. [yenchenlin/DeepLearningFlappyBird](https://github.com/yenchenlin/DeepLearningFlappyBird)
+4. [mgbellemare/Arcade-Learning-Environment](https://github.com/mgbellemare/Arcade-Learning-Environment)
