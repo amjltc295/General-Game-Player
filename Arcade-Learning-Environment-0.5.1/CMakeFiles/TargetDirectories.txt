@@ -1,6 +1,0 @@
-/home/allen/tensorflow/DeepLearningFlappyBird/Arcade-Learning-Environment-0.5.1/CMakeFiles/rebuild_cache.dir
-/home/allen/tensorflow/DeepLearningFlappyBird/Arcade-Learning-Environment-0.5.1/CMakeFiles/ale-lib.dir
-/home/allen/tensorflow/DeepLearningFlappyBird/Arcade-Learning-Environment-0.5.1/CMakeFiles/ale-bin.dir
-/home/allen/tensorflow/DeepLearningFlappyBird/Arcade-Learning-Environment-0.5.1/CMakeFiles/edit_cache.dir
-/home/allen/tensorflow/DeepLearningFlappyBird/Arcade-Learning-Environment-0.5.1/CMakeFiles/ale-c-lib.dir
-/home/allen/tensorflow/DeepLearningFlappyBird/Arcade-Learning-Environment-0.5.1/CMakeFiles/sharedLibraryInterfaceExample.dir
