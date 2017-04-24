@@ -1,23 +1,23 @@
 # General Game Player Using Deep Q-Network
 
-7 mins version: [DQN for flappy bird](https://www.youtube.com/watch?v=THhUXIhjkCM)
 
 ## Overview
 This project is a practice of Deep Q Learning algorithm.
 Modify Flappybird from https://github.com/yenchenlin1994/DeepLearningFlappyBird.git
+Use DQN as a General Game Player, could train all ALE supported games.
 
 ## Installation Dependencies:
-* Python 2.7 or 3
+* Python 2.7
 * TensorFlow 0.7
 * pygame
 * OpenCV-Python
-* Atari Learning Environment
+* Acrade Learning Environment 0.5.0
 
 ## How to Run?
 ```
 git clone https://github.com/amjltc295/General-Game-Player
 cd General-Game-Player
-python DQN_self.py
+python DQN_self.py <game name, only names in roms/ are valid>
 ```
 
 ## What is Deep Q-Network?

@@ -7,7 +7,8 @@
 import sys
 from random import randrange
 #from ale_python_interface import ALEInterface
-sys.path.append('Arcade-Learning-Environment-0.5.1')
+#sys.path.append('Arcade-Learning-Environment-0.5.1')
+sys.path.append('roms')
 from ale_python_interface.ale_python_interface import ALEInterface
 #import ALEInterface
 import pygame
@@ -15,6 +16,7 @@ import numpy as np
 
 def getActionNum(filename):
     ale = ALEInterface()
+    print ("filename:", filename)
     ale.loadROM(filename)
 
     legal_actions = ale.getMinimalActionSet()

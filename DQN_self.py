@@ -218,10 +218,10 @@ def trainNetwork(s, readout, h_fc1, sess, gameName, gamePath, actionNum):
 
 def playGame(gameName):
     #check if game exists
-    gamePath = "Arcade-Learning-Environment-0.5.1/roms/"+sys.argv[1]+".bin"
+    gamePath = "roms/"+sys.argv[1]+".bin"
     if not os.path.exists(gamePath):
         print ('Error:'+gamePath+' does not exists.')
-        gamePath = "Arcade-Learning-Environment-0.5.1/roms/"+sys.argv[1]+".BIN"
+        gamePath = "roms/"+sys.argv[1]+".BIN"
         print ("Try "+gamePath)
         if not os.path.exists(gamePath):
             raise IOError('Error:'+gamePath+' does not exists.')
