@@ -1,0 +1,6 @@
+model_checkpoint_path: "breakout-dqn-530000"
+all_model_checkpoint_paths: "breakout-dqn-490000"
+all_model_checkpoint_paths: "breakout-dqn-500000"
+all_model_checkpoint_paths: "breakout-dqn-510000"
+all_model_checkpoint_paths: "breakout-dqn-520000"
+all_model_checkpoint_paths: "breakout-dqn-530000"

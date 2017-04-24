@@ -9,6 +9,7 @@ import wrapped_flappy_bird as game
 import random
 import numpy as np
 from collections import deque
+import matplotlib.pyplot as plt
 
 GAME = 'bird' # the name of the game being played for log files
 ACTIONS = 2 # number of valid actions
@@ -138,9 +139,13 @@ def trainNetwork(s, readout, h_fc1, sess):
         x_t1_colored, r_t, terminal = game_state.frame_step(a_t)
         x_t1 = cv2.cvtColor(cv2.resize(x_t1_colored, (80, 80)), cv2.COLOR_BGR2GRAY)
         ret, x_t1 = cv2.threshold(x_t1, 1, 255, cv2.THRESH_BINARY)
+        #plt.imshow(x_t1)
+        #plt.show()
         x_t1 = np.reshape(x_t1, (80, 80, 1))
         #s_t1 = np.append(x_t1, s_t[:,:,1:], axis = 2)
         s_t1 = np.append(x_t1, s_t[:, :, :3], axis=2)
+        #plt.imshow(s_t1)
+        #plt.show()
 
         # store the transition in D
         D.append((s_t, a_t, r_t, s_t1, terminal))
