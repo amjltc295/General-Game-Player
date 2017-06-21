@@ -8,6 +8,17 @@ Modify Flappybird DQN from https://github.com/yenchenlin1994/DeepLearningFlappyB
 
 Use DQN as a General Game Player, could train all ALE supported games.
 
+Also, it could reassemble the screen in specific random order, to see if the network could be trained as well.
+
+
+Normal version of AIR RAID screen and its training input image:
+<img src="./images/normal_screen.png">
+<img src="./images/normal.png">
+
+Reassembl the screen:
+<img src="./images/random_screen.png">
+<img src="./images/random.png">
+
 ## Installation Dependencies:
 * Python 2.7
 * TensorFlow 0.7
@@ -19,7 +30,12 @@ Use DQN as a General Game Player, could train all ALE supported games.
 ```
 git clone https://github.com/amjltc295/General-Game-Player
 cd General-Game-Player
-python DQN_self.py <game name, only names in roms/ are valid>
+python DQN_randomMapping.py <game name, only names in roms/ are valid> [-r if need to reassemble the screen]
+// For example:
+python DQN_randomMapping.py Breakout 
+// Could run in background and record the output on Linux
+python DQN_randomMapping.py Breakout > Breakout_output.txt 2>&1 & 
+
 ```
 
 ## What is Deep Q-Network?
