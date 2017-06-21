@@ -2,9 +2,11 @@
 
 
 ## Overview
-This project is a practice of Deep Q Learning algorithm.
+This project is a practice of Deep Q Learning algorithm and some experiments with the screen adjacency.
 
-Modify Flappybird DQN from https://github.com/yenchenlin1994/DeepLearningFlappyBird.git
+I want to reproduce the results in [Playing Atari with Deep Reinforcement Learning](https://www.cs.toronto.edu/~vmnih/docs/dqn.pdf)
+
+Modify DQN from [DeepLearningFlappyBird](https://github.com/yenchenlin1994/DeepLearningFlappyBird.git)
 
 Use DQN as a General Game Player, could train all ALE supported games.
 
@@ -12,12 +14,14 @@ Also, it could reassemble the screen in specific random order, to see if the net
 
 
 Normal version of AIR RAID screen and its training input image:
+
 <img src="./images/normal_screen.png">
-<img src="./images/normal.png">
+<img src="./images/normal.png" width=200>
 
 Reassembl the screen:
+
 <img src="./images/random_screen.png">
-<img src="./images/random.png">
+<img src="./images/random.png" width=200>
 
 ## Installation Dependencies:
 * Python 2.7
@@ -38,12 +42,9 @@ python DQN_randomMapping.py Breakout > Breakout_output.txt 2>&1 &
 
 ```
 
-## What is Deep Q-Network?
-It is a convolutional neural network, trained with a variant of Q-learning, whose input is raw pixels and whose output is a value function estimating future rewards.
 
-For those who are interested in deep reinforcement learning, I highly recommend to read the following post:
+''Note: the following part are from [DeepLearningFlappyBird](https://github.com/yenchenlin1994/DeepLearningFlappyBird.git)''
 
-[Demystifying Deep Reinforcement Learning](http://www.nervanasys.com/demystifying-deep-reinforcement-learning/)
 
 ## Deep Q-Network Algorithm
 
@@ -99,23 +100,6 @@ However, in other games, initialize ϵ to 1 is more reasonable.
 
 During training time, at each time step, the network samples minibatches of size 32 from the replay memory to train on, and performs a gradient step on the loss function described above using the Adam optimization algorithm with a learning rate of 0.000001. After annealing finishes, the network continues to train indefinitely, with ϵ fixed at 0.001.
 
-## FAQ
-
-#### Checkpoint not found
-Change [first line of `saved_networks/checkpoint`](https://github.com/yenchenlin1994/DeepLearningFlappyBird/blob/master/saved_networks/checkpoint#L1) to 
-
-`model_checkpoint_path: "saved_networks/bird-dqn-2920000"`
-
-#### How to reproduce?
-1. Comment out [these lines](https://github.com/yenchenlin1994/DeepLearningFlappyBird/blob/master/deep_q_network.py#L108-L112)
-
-2. Modify `deep_q_network.py`'s parameter as follow:
-```python
-OBSERVE = 10000
-EXPLORE = 3000000
-FINAL_EPSILON = 0.0001
-INITIAL_EPSILON = 0.1
-```
 
 ## References
 
@@ -125,6 +109,9 @@ INITIAL_EPSILON = 0.1
 
 [3] Kevin Chen. **Deep Reinforcement Learning for Flappy Bird** [Report](http://cs229.stanford.edu/proj2015/362_report.pdf) | [Youtube result](https://youtu.be/9WKBzTUsPKc)
 
+
+''Note: the above parts are from [DeepLearningFlappyBird](https://github.com/yenchenlin1994/DeepLearningFlappyBird.git)''
+
 ## Disclaimer
 This work is highly based on the following repos:
 
@@ -132,3 +119,7 @@ This work is highly based on the following repos:
 2. [asrivat1/DeepLearningVideoGames](https://github.com/asrivat1/DeepLearningVideoGames)
 3. [yenchenlin/DeepLearningFlappyBird](https://github.com/yenchenlin/DeepLearningFlappyBird)
 4. [mgbellemare/Arcade-Learning-Environment](https://github.com/mgbellemare/Arcade-Learning-Environment)
+
+## Author
+
+Ya-Liang Chang [amjltc295](https://github.com/amjltc295/)
