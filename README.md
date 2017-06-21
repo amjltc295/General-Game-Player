@@ -15,11 +15,11 @@ Also, it could reassemble the screen in specific random order, to see if the net
 
 Normal version of AIR RAID screen and its training input image:
 
-<img src="./images/normal_screen.png"><img src="./images/normal.png" width=300>
+<img src="./images/normal_screen.png"><img src="./images/normal.png" width=350>
 
 Reassembl the screen:
 
-<img src="./images/random_screen.png"><img src="./images/random.png" width=300>
+<img src="./images/random_screen.png"><img src="./images/random.png" width=350>
 
 ## Installation Dependencies:
 * Python 2.7
@@ -83,7 +83,7 @@ From [DeepLearningFlappyBird](https://github.com/yenchenlin1994/DeepLearningFlap
 ## Disclaimer
 This work is highly based on the following repos:
 
-1. [sourabhv/FlapPyBird] (https://github.com/sourabhv/FlapPyBird)
+1. [sourabhv/FlapPyBird](https://github.com/sourabhv/FlapPyBird)
 2. [asrivat1/DeepLearningVideoGames](https://github.com/asrivat1/DeepLearningVideoGames)
 3. [yenchenlin/DeepLearningFlappyBird](https://github.com/yenchenlin/DeepLearningFlappyBird)
 4. [mgbellemare/Arcade-Learning-Environment](https://github.com/mgbellemare/Arcade-Learning-Environment)
