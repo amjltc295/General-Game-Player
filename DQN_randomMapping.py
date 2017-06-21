@@ -19,7 +19,7 @@ GAMMA = 0.99 # decay rate of past observations
 OBSERVE = 10000. # timesteps to observe before training
 EXPLORE = 200000. # frames over which to anneal epsilon
 FINAL_EPSILON = 0.0001 # final value of epsilon
-INITIAL_EPSILON = 0.5 # starting value of epsilon
+INITIAL_EPSILON = 0.1 # starting value of epsilon
 REPLAY_MEMORY = 50000 # number of previous transitions to remember
 BATCH = 32 # size of minibatch
 FRAME_PER_ACTION = 1
@@ -96,7 +96,7 @@ def trainNetwork(s, readout, h_fc1, sess, gameName, gamePath, actionNum, mapping
     # define the cost function
     a = tf.placeholder("float", [None, actionNum])
     y = tf.placeholder("float", [None])
-    readout_action = tf.reduce_sum(tf.mul(readout, a), reduction_indices=1)
+    readout_action = tf.reduce_sum(tf.multiply(readout, a), reduction_indices=1)
     cost = tf.reduce_mean(tf.square(y - readout_action))
     train_step = tf.train.AdamOptimizer(1e-6).minimize(cost)
 
@@ -120,13 +120,15 @@ def trainNetwork(s, readout, h_fc1, sess, gameName, gamePath, actionNum, mapping
 
     # saving and loading networks
     saver = tf.train.Saver()
-    sess.run(tf.initialize_all_variables())
+    sess.run(tf.global_variables_initializer())
 
     #create correspoding path for saving network
-    if not os.path.exists("saved_networks/"+gameName):
-        os.makedirs("saved_networks/"+gameName)
-        print ("Made directory: "+gameName)
-    checkpoint = tf.train.get_checkpoint_state("saved_networks/"+gameName)
+    dirName = "saved_networks/"+gameName+"/"
+    if not os.path.exists(dirName):
+        os.makedirs(dirName)
+    print ("Save networks directory:" + dirName)
+
+    checkpoint = tf.train.get_checkpoint_state(dirName)
     if checkpoint and checkpoint.model_checkpoint_path:
         saver.restore(sess, checkpoint.model_checkpoint_path)
         print("Successfully loaded:", checkpoint.model_checkpoint_path)
@@ -136,6 +138,7 @@ def trainNetwork(s, readout, h_fc1, sess, gameName, gamePath, actionNum, mapping
     # start training
     epsilon = INITIAL_EPSILON
     t = 0
+    total_rt = 0.0
     while True:
         # choose an action epsilon greedily
         readout_t = readout.eval(feed_dict={s : [s_t]})[0]
@@ -159,9 +162,10 @@ def trainNetwork(s, readout, h_fc1, sess, gameName, gamePath, actionNum, mapping
         # run the selected action and observe next state and reward
         x_t1_colored, r_t, terminal = game_state.frame_step(a_t)
         x_t1 = cv2.cvtColor(cv2.resize(x_t1_colored, (80, 80)), cv2.COLOR_BGR2GRAY)
-        x_t1 = image_random_mapping(x_t1, mappingArray)
+        if len(mappingArray):
+            x_t1 = image_random_mapping(x_t1, mappingArray)
         #ret, x_t1 = cv2.threshold(x_t1, TH_L, TH_H, cv2.THRESH_BINARY)
-        if (t < 3):
+        if (t < 1):
             plt.imshow(x_t1.T)
             plt.show()
         x_t1 = np.reshape(x_t1, (80, 80, 1))
@@ -204,10 +208,11 @@ def trainNetwork(s, readout, h_fc1, sess, gameName, gamePath, actionNum, mapping
         # update the old values
         s_t = s_t1
         t += 1
+        total_rt += r_t
 
         # save progress every 10000 iterations
         if t % 10000 == 0:
-            saver.save(sess, 'saved_networks/' + gameName + '-dqn', global_step = t)
+            saver.save(sess, dirName + gameName + '-dqn' + ("" if not len( mappingArray) else '-random'), global_step = t)
 
         # print info
         state = ""
@@ -220,14 +225,12 @@ def trainNetwork(s, readout, h_fc1, sess, gameName, gamePath, actionNum, mapping
 
         print("TIMESTEP", t, "/ STATE", state, \
             "/ EPSILON", epsilon, "/ ACTION", action_index, "/ REWARD", r_t, \
-            "/ Q_MAX %e" % np.max(readout_t))
+            "/ Q_MAX %e" % np.max(readout_t), "/ AVG RT %f" % (total_rt/t), "/ rm: %s" % ('y' if len(mappingArray) else "n" ))
         # write info to files
-        '''
         if t % 10000 <= 100:
             a_file.write(",".join([str(x) for x in readout_t]) + '\n')
             h_file.write(",".join([str(x) for x in h_fc1.eval(feed_dict={s:[s_t]})[0]]) + '\n')
             cv2.imwrite("logs_tetris/frame" + str(t) + ".png", x_t1)
-        '''
 
 def playGame(gameName):
     #check if game exists
@@ -238,16 +241,31 @@ def playGame(gameName):
         print ("Try "+gamePath)
         if not os.path.exists(gamePath):
             raise IOError('Error:'+gamePath+' does not exists.')
-        
+
     #get how many legal actions in actionNum to initialize Neural Network
     actionNum = game.getActionNum(gamePath)
 
     sess = tf.InteractiveSession()
     s, readout, h_fc1 = createNetwork(actionNum)
-    mappingArray = np.arange(0, 80*80)
-    mappingArray = np.reshape(mappingArray, (80, 80))
-    np.random.shuffle(mappingArray.flat)
-    gameName = gameName + "_randomMapping"
+
+    if len(sys.argv) >2:
+        if os.path.isfile('mapping.txt'):
+            with open('mapping.txt', 'r') as mapping_file:
+                mappingArray = np.load(mapping_file)
+            print ('Read mapping from file: mapping.txt')
+            print (mappingArray)
+        else:
+            mappingArray = np.arange(0, 80*80)
+            mappingArray = np.reshape(mappingArray, (80, 80))
+            np.random.shuffle(mappingArray.flat)
+            with open('mapping.txt', 'wb') as mapping_file:
+                np.save(mapping_file, mappingArray)
+            print ('Mapping file: mapping.txt does not exist')
+            print ('Create new mapping..  mapping.txt written')
+
+        gameName = gameName + "_randomMapping"
+    else:
+        mappingArray = []
     trainNetwork(s, readout, h_fc1, sess, gameName, gamePath, actionNum, mappingArray)
 
 def main(gameName):
@@ -255,6 +273,6 @@ def main(gameName):
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print ('Usage:', sys.argv[0], 'gameName')
+        print ('Usage:', sys.argv[0], 'gameName', '-r')
     else:
         main(sys.argv[1])

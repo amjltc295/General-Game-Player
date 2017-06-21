@@ -5,7 +5,7 @@
 # This is a direct port to python of the shared library example from
 # ALE provided in doc/examples/sharedLibraryInterfaceExample.cpp
 import sys
-from random import randrange
+#from random import randrange
 #from ale_python_interface import ALEInterface
 #sys.path.append('Arcade-Learning-Environment-0.5.1')
 sys.path.append('roms')
@@ -23,7 +23,7 @@ def getActionNum(filename):
     actionNum =  len(legal_actions)
     print ("ActionNum:", actionNum)
     return actionNum
-    
+
 class GameState():
     def __init__(self, filename):
         self.ale = ALEInterface()
@@ -35,15 +35,17 @@ class GameState():
 
         self.legal_actions = self.ale.getMinimalActionSet()
         print ("Action size: ", len(self.legal_actions))
+        self.live = self.ale.lives()
+        print ("Total lives: ", self.live)
 
         pygame.init()
         self.size = self.width, self.height = self.ale.getScreenDims()
         print ("Window size:", self.size)
-        i = raw_input("Press ENTER to continue")
+        #i = raw_input("Press ENTER to continue")
         #size = width, height = 480, 640
         self.screen = pygame.display.set_mode(self.size)
         self.clock = pygame.time.Clock()
-        
+
 
     def frame_step(self, input_actions):
         a = None
@@ -54,15 +56,19 @@ class GameState():
                 a = self.legal_actions[i]
                 break
         reward = self.ale.act(a);
-        terminal = self.ale.game_over()
+        #terminal = self.ale.game_over()
+        terminal = False
+        #print (self.ale.lives(), ' / ', self.live)
+        if (self.ale.lives() != self.live):
+            terminal = True
         if not terminal:
             if reward > 1: reward = 1
             elif reward < 1: reward = 0.1
             if reward < 0: reward = -1
-        else: 
+        else:
             reward = -1
             self.ale.reset_game()
-    
+
         image_data = self.ale.getScreen()
         #screen_data = ale.getScreenRGB()
         image_data = np.reshape(image_data, (-1, self.width)).T
