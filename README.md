@@ -15,13 +15,11 @@ Also, it could reassemble the screen in specific random order, to see if the net
 
 Normal version of AIR RAID screen and its training input image:
 
-<img src="./images/normal_screen.png">
-<img src="./images/normal.png" width=200>
+<img src="./images/normal_screen.png"><img src="./images/normal.png" width=300>
 
 Reassembl the screen:
 
-<img src="./images/random_screen.png">
-<img src="./images/random.png" width=200>
+<img src="./images/random_screen.png"><img src="./images/random.png" width=300>
 
 ## Installation Dependencies:
 * Python 2.7
@@ -43,7 +41,7 @@ python DQN_randomMapping.py Breakout > Breakout_output.txt 2>&1 &
 ```
 
 
-''Note: the following part are from [DeepLearningFlappyBird](https://github.com/yenchenlin1994/DeepLearningFlappyBird.git)''
+**<Note: the following part are from [DeepLearningFlappyBird](https://github.com/yenchenlin1994/DeepLearningFlappyBird.git)**
 
 
 ## Deep Q-Network Algorithm
@@ -110,7 +108,7 @@ During training time, at each time step, the network samples minibatches of size
 [3] Kevin Chen. **Deep Reinforcement Learning for Flappy Bird** [Report](http://cs229.stanford.edu/proj2015/362_report.pdf) | [Youtube result](https://youtu.be/9WKBzTUsPKc)
 
 
-''Note: the above parts are from [DeepLearningFlappyBird](https://github.com/yenchenlin1994/DeepLearningFlappyBird.git)''
+**Note: the above parts are from [DeepLearningFlappyBird](https://github.com/yenchenlin1994/DeepLearningFlappyBird.git)**
 
 ## Disclaimer
 This work is highly based on the following repos:
