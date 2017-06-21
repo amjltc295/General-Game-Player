@@ -27,6 +27,7 @@ Reassembl the screen:
 * pygame
 * OpenCV-Python
 * Acrade Learning Environment 0.5.0
+Need to build ALE and get ale_python_interface/ from [The Arcade Learning Environment](http://www.arcadelearningenvironment.org/downloads/) .
 
 ## How to Run?
 ```
