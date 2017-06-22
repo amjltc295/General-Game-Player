@@ -78,8 +78,6 @@ From [DeepLearningFlappyBird](https://github.com/yenchenlin1994/DeepLearningFlap
 
 [3] Kevin Chen. **Deep Reinforcement Learning for Flappy Bird** [Report](http://cs229.stanford.edu/proj2015/362_report.pdf) | [Youtube result](https://youtu.be/9WKBzTUsPKc)
 
-[4] Volodymyr Mnih, Koray Kavukcuoglu, David Silver, Alex Graves, Ioannis Antonoglou, Daan Wierstra, Martin Riedmiller. **Playing Atari with Deep Reinforcement Learning**. DeepMind Technologies
-, 2013.
 
 
 ## Disclaimer
