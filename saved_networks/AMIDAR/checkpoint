@@ -1,0 +1,2 @@
+model_checkpoint_path: "AMIDAR-dqn-980000"
+all_model_checkpoint_paths: "AMIDAR-dqn-980000"

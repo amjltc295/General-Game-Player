@@ -1,0 +1,2 @@
+model_checkpoint_path: "AMIDAR_randomMapping-dqn-random-820000"
+all_model_checkpoint_paths: "AMIDAR_randomMapping-dqn-random-820000"

@@ -1,2 +1,0 @@
-model_checkpoint_path: "Breakout-dqn-10000"
-all_model_checkpoint_paths: "Breakout-dqn-10000"
