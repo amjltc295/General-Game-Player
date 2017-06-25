@@ -21,6 +21,10 @@ Reassembl the screen:
 
 <img src="./images/random_screen.png"><img src="./images/random.png" width=350>
 
+Result (AMIDAR):
+<img src="./images/AMIDAR_1.png">
+
+
 ## Installation Dependencies:
 * Python 2.7
 * TensorFlow 0.7
@@ -30,15 +34,26 @@ Reassembl the screen:
 
 Need to build ALE and get ale_python_interface/ from [The Arcade Learning Environment](http://www.arcadelearningenvironment.org/downloads/) .
 
+
+To plot and evaluate:
+* Python 3.x
+* Matplotlib
+* Pickle
+
 ## How to Run?
 ```
 git clone https://github.com/amjltc295/General-Game-Player
 cd General-Game-Player
 python DQN_randomMapping.py <game name, only names in roms/ are valid> [-r if need to reassemble the screen]
+
 // For example:
 python DQN_randomMapping.py Breakout 
+
 // Could run in background and record the output on Linux
 python DQN_randomMapping.py Breakout > Breakout_output.txt 2>&1 & 
+python DQN_randomMapping.py -r Breakout > Breakout_rm_output.txt 2>&1 & 
+// Evaluate at plot the result
+python3 evalute.py Breakout_output.txt Breakout_rm_output.txt <... for multiple result comparison>
 
 ```
 
