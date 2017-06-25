@@ -82,7 +82,10 @@ def main(filenames):
         else:
             print ("File", filename, "does not exists.")
 
-    plt.legend()
+    plt.title("Result")
+    plt.legend(loc=2)
+    plt.xlabel("Number of Frame")
+    plt.ylabel("AVG Reward: score = 1, nothig = 0.1, death = -1")
     plt.show()
 
 if __name__ == "__main__":

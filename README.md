@@ -13,16 +13,17 @@ Use DQN as a General Game Player, could train all ALE supported games.
 Also, it could reassemble the screen in specific random order, to see if the network could be trained as well.
 
 
-Normal version of AIR RAID screen and its training input image:
+Normal version of AMIDAR screen and its training input image:
 
 <img src="./images/normal_screen.png"><img src="./images/normal.png" width=350>
 
 Reassembl the screen:
 
-<img src="./images/random_screen.png"><img src="./images/random.png" width=350>
+<img src="./images/normal_screen.png"><img src="./images/random.png" width=350>
 
-Result (AMIDAR):
-<img src="./images/AMIDAR_1.png">
+Result:
+
+<img src="./images/AMIDAR_2.png">
 
 
 ## Installation Dependencies:
@@ -47,13 +48,13 @@ cd General-Game-Player
 python DQN_randomMapping.py <game name, only names in roms/ are valid> [-r if need to reassemble the screen]
 
 // For example:
-python DQN_randomMapping.py Breakout 
+python DQN_randomMapping.py AMIDAR 
 
 // Could run in background and record the output on Linux
-python DQN_randomMapping.py Breakout > Breakout_output.txt 2>&1 & 
-python DQN_randomMapping.py -r Breakout > Breakout_rm_output.txt 2>&1 & 
+python DQN_randomMapping.py AMIDAR > AMIDAR_output.txt 2>&1 & 
+python DQN_randomMapping.py -r AMIDAR > AMIDAR_rm_output.txt 2>&1 & 
 // Evaluate at plot the result
-python3 evalute.py Breakout_output.txt Breakout_rm_output.txt <... for multiple result comparison>
+python3 evaluate.py AMIDAR_output.txt AMIDAR_rm_output.txt <... for multiple result comparison>
 
 ```
 
