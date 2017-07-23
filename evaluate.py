@@ -57,23 +57,33 @@ def main(filenames):
                 print ("Cannot find previous result.")
                 with open(filename, 'r') as result_file:
                     count = 0
+                    total_rt = 0.0
+                    avg_rt = 0.0
 
                     for line in result_file:
                         #print (line)
-                        if (line[:4] == 'TIME'):
-                            count += 1
-                            timestep = int(line.split('STEP ')[1].split(' ')[0])
-                            state = line.split('STATE ')[1].split(' ')[0]
-                            epsilon = line.split('EPSILON ')[1].split(' ')[0]
-                            action = line.split('ACTION ')[1].split(' ')[0]
-                            reward = line.split('REWARD ')[1].split(' ')[0]
-                            q_max = float(line.split('Q_MAX ')[1].split(' ')[0])
-                            avg_rt = float(line.split('AVG RT ')[1].split(' ')[0])
-                            rm = line.split('rm: ')[1][0]
-                            #print (timestep, state, epsilon, action, reward, q_max, avg_rt, rm)
-                            if count % PERIOD == 0:
-                                print ("Timestep: ", count, "AVG_RT: ", avg_rt, end='\r')
-                                result.add(avg_rt, q_max, count)
+                        if (line[:8] == 'TIMESTEP'):
+                            try:
+                                count += 1
+                                timestep = int(line.split('STEP ')[1].split(' ')[0])
+                                state = line.split('STATE ')[1].split(' ')[0]
+                                epsilon = line.split('EPSILON ')[1].split(' ')[0]
+                                action = line.split('ACTION ')[1].split(' ')[0]
+                                reward = float(line.split('REWARD ')[1].split(' ')[0])
+                                q_max = float(line.split('Q_MAX ')[1].split(' ')[0])
+                                if 'rm' in line:
+                                    avg_rt = float(line.split('AVG RT ')[1].split(' ')[0])
+                                    rm = line.split('rm: ')[1][0]
+                                else:
+                                    total_rt += reward
+                                    avg_rt = total_rt / count
+                                #print (timestep, state, epsilon, action, reward, q_max, avg_rt, rm)
+                                if count % PERIOD == 0:
+                                    print ("Timestep: ", count, "AVG_RT: ", avg_rt, end='\r')
+                                    result.add(avg_rt, q_max, count)
+                            except:
+                                print (line)
+                                stop = input("Error, press to continue ..")
                 writePickle(pickle_filename, result)
 
             result.plot()
